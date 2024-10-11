@@ -1,10 +1,10 @@
 // pages/index.tsx
 import React from 'react';
-import Layout from '../components/Layout';
+import RootLayout from '../app/layout'; // RootLayout 경로 확인 후 수정
 
 const Home: React.FC = () => {
   return (
-    <Layout>
+    <RootLayout>
       {/* Main Banner */}
       <section className="relative h-screen bg-gray-200">
         <img
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
         </div>
         {/* More products... */}
       </section>
-    </Layout>
+    </RootLayout>
   );
 };
 
