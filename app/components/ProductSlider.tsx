@@ -17,7 +17,14 @@ interface Product {
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
   <div className="px-2">
     <div className="border rounded-lg overflow-hidden shadow-lg">
-      <Image src={product.image} alt={product.name} width={300} height={300} className="w-full h-48 object-cover" />
+      <Image
+        src={product.image}
+        alt={product.name}
+        width={500}
+        height={400}
+        className="w-full h-48 object-cover"
+        style={{ objectFit: 'cover' }} // 추가된 부분
+      />
       <div className="p-4">
         <h3 className="text-lg font-semibold">{product.name}</h3>
         <p className="text-gray-600">{product.price}원</p>
@@ -25,6 +32,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
     </div>
   </div>
 );
+
 
 interface ProductSliderProps {
   title: string;
