@@ -1,4 +1,3 @@
-
 export default function Header() {
   return (
     <header className="bg-white shadow-md border-b border-gray-300">

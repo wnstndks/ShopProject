@@ -1,7 +1,5 @@
 // app/page.tsx
-import React from 'react';
 import dynamic from 'next/dynamic';
-import myimage from './public/img/arsenal.png'
 const ProductSlider = dynamic(() => import('../app/components/ProductSlider'), { ssr: false });
 
 const Home: React.FC = () => {
