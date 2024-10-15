@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';  // Next.js 라우터 훅
 
 interface CartItem {
     id: number;
@@ -15,9 +16,13 @@ export default function Cart() {
         { id: 2, name: "아이템 2", price: 30000, image: "/img/arsenal.png" },
     ]);
 
+    const router = useRouter();  // 라우터 훅 생성
+
     const handleCheckout = () => {
-        // 체크아웃 처리 로직
-        console.log('체크아웃 진행:', cartItems);
+        // 구매 처리 로직
+        console.log('구매 진행:', cartItems);
+        // 구매 완료 후 구매내역 페이지로 이동
+        router.push('/Buy');  // '/buy' 경로로 이동
     };
 
     return (
@@ -43,7 +48,7 @@ export default function Cart() {
                 onClick={handleCheckout} 
                 className="mt-6 p-3 w-full bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
             >
-                체크아웃
+                구매
             </button>
         </div>
     );
