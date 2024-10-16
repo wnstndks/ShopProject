@@ -21,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} font-sans min-h-screen flex flex-col`}>
         <Header />
+        {/* 헤더와 페이지 콘텐츠가 겹치지 않도록 패딩 추가 */}
         <main className="flex-1">
           {children}
         </main>

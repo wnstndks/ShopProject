@@ -1,6 +1,7 @@
 export default function ClothesInfo() {
     return (
         <div className="p-6 bg-white shadow-md rounded-lg">
+            <br/>
             <h1 className="text-3xl font-bold mb-4">상품명</h1>
             <img src="/images/product.jpg" alt="상품 이미지" className="w-full h-64 object-cover mb-4 rounded-md" />
             <p className="text-lg text-gray-600 mb-2">상세 설명: 이 상품은 최고의 품질을 자랑합니다.</p>
