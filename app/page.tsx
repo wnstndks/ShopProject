@@ -1,52 +1,62 @@
-import dynamic from 'next/dynamic';
+'use client'
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-// const ProductSlider = dynamic(() => import('../app/components/ProductSlider'), { ssr: false });
+export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
 
-const Home: React.FC = () => {
-  const bestSellers = [
-    { id: 1, name: '베스트 상품 1', price: '29,000', image: '/img/arsenal.png' },
-    { id: 2, name: '베스트 상품 2', price: '39,000', image: '/img/arsenal.png' },
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const imageSets = [
+    { left: '/img/arsenal.jpg', right: '/img/totenham.jpg' },
+    { left: '/img/totenham.jpg', right: '/img/arsenal.jpg' }
   ];
 
-  const trendingItems = [
-    { id: 3, name: '트렌드 상품 1', price: '34,000', image: '/img/arsenal.png' },
-    { id: 4, name: '트렌드 상품 2', price: '44,000', image: '/img/arsenal.png' },
-  ];
+  const calculateStyle = (index: number) => {
+    const viewportHeight = window.innerHeight;
+    const offset = scrollY - index * viewportHeight;
+    const progress = Math.max(0, Math.min(offset / viewportHeight, 1));
+    
+    // Move the image up by 20% of its height
+    const translateY = progress * 20;
+    
+    return {
+      transform: `translateY(-${translateY}%)`,
+      transition: 'transform 0.3s ease-out',
+    };
+  };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Left side image */}
-      <div className="absolute left-0 top-0 h-screen w-1/2 z-0">
-        <Image 
-          src="/img/arsenal.jpg" 
-          alt="Left" 
-          layout="fill" 
-          objectFit="cover" 
-          className="opacity-90"
-        />
-      </div>
-
-      {/* Right side image */}
-      <div className="absolute right-0 top-0 h-screen w-1/2 z-0">
-        <Image 
-          src="/img/totenham.jpg" 
-          alt="Right" 
-          layout="fill" 
-          objectFit="cover" 
-          className="opacity-90"
-        />
-      </div>
-
-      {/* Scrollable content */}
-      {/* <div className="relative z-10 container mx-auto px-4 pt-12 bg-white bg-opacity-90">
-        <h1 className="text-4xl font-bold text-center mb-12">Welcome to Our Shop</h1>
-        
-        <ProductSlider title="베스트 셀러" products={bestSellers} />
-        <ProductSlider title="트렌드 아이템" products={trendingItems} />
-      </div> */}
+    <div className="relative">
+      {imageSets.map((set, index) => (
+        <div key={index} className="relative h-screen w-full sticky top-0 overflow-hidden">
+          <div className="absolute inset-0" style={calculateStyle(index)}>
+            <div className="relative h-full w-full flex">
+              <div className="flex-1 relative">
+                <Image 
+                  src={set.left} 
+                  alt={`Left ${index + 1}`} 
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div className="flex-1 relative">
+                <Image 
+                  src={set.right} 
+                  alt={`Right ${index + 1}`} 
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
-};
-
-export default Home;
+}
