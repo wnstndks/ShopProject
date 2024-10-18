@@ -49,7 +49,7 @@ export default function ClothesInfo() {
                     <div className="space-y-2">
                         <button className="w-full bg-black text-white py-3 hover:bg-gray-800 transition-colors flex items-center justify-center">
                             <ShoppingBag className="mr-2" size={20} />
-                            장바구니에 추가
+                            <a href='/Cart'>장바구니에 추가</a>
                         </button>
                         <button className="w-full border border-black py-3 hover:bg-gray-100 transition-colors flex items-center justify-center">
                             <Heart className="mr-2" size={20} />
