@@ -12,7 +12,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const image = ["/img/fs1.jpg", "/img/fs2.jpg", "/img/fs3.jpg"];
+  const image = ["/img/fs4.jpg", "/img/fs2.jpg", "/img/fs3.jpg"];
 
   const imageSets = [
     { left: "/img/arsenal.jpg", right: "/img/totenham.jpg" },
