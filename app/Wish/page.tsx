@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Wish() {
     return (
-        <div className="container mx-auto p-4 mt-16"> {/* 상단 여백 추가 */}
+        <div className="container mx-auto p-4 mt-24"> {/* 상단 여백 추가 */}
             <h1 className="text-3xl font-bold mb-8 text-center">위시리스트</h1> {/* 중앙 정렬 및 여백 조정 */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> {/* gap 증가 */}
                 {Array.from({ length: 9 }).map((_, index) => (

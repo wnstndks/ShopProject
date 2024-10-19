@@ -26,10 +26,8 @@ export default function Cart() {
     };
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen">
-            
-            <h1 className="text-3xl font-bold mb-6">장바구니 페이지</h1>
-            <br/>
+        <div className="container mx-auto p-4 mt-24"> {/* 상단 여백 추가 */}
+            <h1 className="text-3xl font-bold mb-8 text-center">장바구니리스트</h1> 
             {cartItems.length === 0 ? (
                 <p className="text-lg">장바구니에 아이템이 없습니다.</p>
             ) : (

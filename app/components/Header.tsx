@@ -31,6 +31,9 @@ export default function Header() {
               <a href="/Login">Login</a>
             </button>
             <button className="text-black px-4 py-2 rounded-md hover:text-blue-600 transition duration-300">
+              <a href="/Wish">Wish</a>
+            </button>
+            <button className="text-black px-4 py-2 rounded-md hover:text-blue-600 transition duration-300">
               <a href="/Cart">Cart</a>
             </button>
           </div>
