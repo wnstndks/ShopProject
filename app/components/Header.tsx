@@ -8,7 +8,6 @@ export default function Header() {
     Man: ["상의", "바지", "아우터", "신발"],
     Woman: ["상의", "바지", "아우터", "신발"],
     Kids: ["상의", "바지", "아우터", "신발"],
-    Beauty: ["메이크업", "스킨케어", "헤어", "향수"],
   };
 
   // 한글 하위 카테고리 -> 영어 URL 변환 객체
@@ -17,10 +16,6 @@ export default function Header() {
     바지: "Pants",
     아우터: "Outer",
     신발: "Shoes",
-    메이크업: "Makeup",
-    스킨케어: "Skincare",
-    헤어: "Hair",
-    향수: "Perfume",
   };
 
   const handleCategoryClick = (category: string) => {
