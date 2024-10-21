@@ -11,36 +11,49 @@ export default function Header() {
     Beauty: ["메이크업", "스킨케어", "헤어", "향수"],
   };
 
+  // 한글 하위 카테고리 -> 영어 URL 변환 객체
+  const categoryMapping = {
+    상의: "Clothes",
+    바지: "Pants",
+    아우터: "Outer",
+    신발: "Shoes",
+    메이크업: "Makeup",
+    스킨케어: "Skincare",
+    헤어: "Hair",
+    향수: "Perfume",
+  };
+
   const handleCategoryClick = (category: string) => {
-    // 이미 선택된 카테고리를 다시 클릭하면 닫힘
     setActiveCategory(activeCategory === category ? null : category);
   };
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3">
-            <div className="flex items-center space-x-8">
-              {/* "Your Zara" 텍스트 */}
-              <div className="text-6xl font-bold text-black">
-                <a href="/">Your Zara</a>
-              </div>
-              <nav>
-                <ul className="flex space-x-6">
-                  {Object.keys(categories).map((category) => (
-                    <li key={category}>
-                      <button
-                        onClick={() => handleCategoryClick(category)}
-                        className="text-black hover:text-blue-500 transition duration-300"
-                      >
-                        {category}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+            {/* 로고 부분 */}
+            <div className="text-6xl font-bold text-black">
+              <a href="/">Your Zara</a>
             </div>
+
+            {/* 카테고리 네비게이션 */}
+            <nav className="ml-10">
+              <ul className="flex space-x-6">
+                {Object.keys(categories).map((category) => (
+                  <li key={category}>
+                    <button
+                      onClick={() => handleCategoryClick(category)}
+                      className="text-black hover:text-blue-500 transition duration-300"
+                    >
+                      {category}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* 검색 및 기타 버튼 */}
             <div className="flex items-center space-x-4">
               <input
                 type="text"
@@ -63,22 +76,22 @@ export default function Header() {
       </header>
 
       {/* 하위 카테고리 표시 영역 */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        {activeCategory && (
-          <div className="bg-gray-100 p-4 rounded-md">
-            <h3 className="text-xl font-bold text-black">
-              {activeCategory} 카테고리
-            </h3>
-            <ul className="flex space-x-4 mt-2">
-              {categories[activeCategory].map((subCategory) => (
-                <li key={subCategory} className="text-black hover:text-blue-500">
-                  <a href={`/${subCategory}`}>{subCategory}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      {activeCategory && (
+        <div className="absolute top-16 left-0 right-0 z-50 max-w-7xl mx-auto px-4 bg-white p-4 rounded-md shadow-lg">
+          <h3 className="text-xl font-bold text-black">
+            {activeCategory} 카테고리
+          </h3>
+          <ul className="flex space-x-4 mt-2">
+            {categories[activeCategory].map((subCategory) => (
+              <li key={subCategory} className="text-black hover:text-blue-500">
+                <a href={`/${categoryMapping[subCategory]}`}>
+                  {subCategory}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 }
