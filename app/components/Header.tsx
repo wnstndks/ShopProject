@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3">
             {/* 로고 부분 */}
@@ -77,7 +77,7 @@ export default function Header() {
 
       {/* 하위 카테고리 표시 영역 */}
       {activeCategory && categories[activeCategory] && (
-        <div className="absolute top-16 left-0 right-0 z-50 max-w-7xl mx-auto px-4 bg-white p-4 rounded-md shadow-lg">
+        <div className="fixed top-20 left-0 right-0 z-50 max-w-7xl mx-auto px-4 bg-white p-4 rounded-md shadow-lg">
           <h3 className="text-xl font-bold text-black">
             {activeCategory} 카테고리
           </h3>
@@ -86,7 +86,7 @@ export default function Header() {
               <li key={subCategory} className="text-black hover:text-blue-500">
                 <a href={`/${categoryMapping[subCategory]}`}>{subCategory}</a>
               </li>
-            ))}
+            ))} 
           </ul>
         </div>
       )}
