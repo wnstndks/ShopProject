@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import { useState } from "react";
 
 export default function Header() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
-  const categories = {
+  const categories: { [key: string]: string[] } = {
     Man: ["상의", "바지", "아우터", "신발"],
     Woman: ["상의", "바지", "아우터", "신발"],
     Kids: ["상의", "바지", "아우터", "신발"],
@@ -12,7 +12,7 @@ export default function Header() {
   };
 
   // 한글 하위 카테고리 -> 영어 URL 변환 객체
-  const categoryMapping = {
+  const categoryMapping: { [key: string]: string } = {
     상의: "Clothes",
     바지: "Pants",
     아우터: "Outer",
@@ -76,17 +76,15 @@ export default function Header() {
       </header>
 
       {/* 하위 카테고리 표시 영역 */}
-      {activeCategory && (
+      {activeCategory && categories[activeCategory] && (
         <div className="absolute top-16 left-0 right-0 z-50 max-w-7xl mx-auto px-4 bg-white p-4 rounded-md shadow-lg">
           <h3 className="text-xl font-bold text-black">
             {activeCategory} 카테고리
           </h3>
           <ul className="flex space-x-4 mt-2">
-            {categories[activeCategory].map((subCategory) => (
+            {categories[activeCategory]?.map((subCategory: string) => (
               <li key={subCategory} className="text-black hover:text-blue-500">
-                <a href={`/${categoryMapping[subCategory]}`}>
-                  {subCategory}
-                </a>
+                <a href={`/${categoryMapping[subCategory]}`}>{subCategory}</a>
               </li>
             ))}
           </ul>
