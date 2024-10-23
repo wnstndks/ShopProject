@@ -5,26 +5,31 @@ import Image from "next/image";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (typeof window !== "undefined") {
+      const handleScroll = () => setScrollY(window.scrollY);
+      const handleResize = () => setViewportHeight(window.innerHeight);
+
+      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("resize", handleResize);
+
+      handleResize(); // 초기 화면 로드 시에 화면 크기 설정
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
 
-  const image = ["/img/fs4.jpg", "/img/fs2.jpg", "/img/fs3.jpg"];
-
-  const imageSets = [
-    { left: "/img/arsenal.jpg", right: "/img/totenham.jpg" },
-    { left: "/img/totenham.jpg", right: "/img/arsenal.jpg" },
-  ];
+  const image = ["/img/fs1.jpg", "/img/fs2.jpg", "/img/fs4.jpg"];
 
   const calculateStyle = (index: number) => {
-    const viewportHeight = window.innerHeight;
     const offset = scrollY - index * viewportHeight;
     const progress = Math.max(0, Math.min(offset / viewportHeight, 1));
 
-    // Move the image up by 20% of its height
     const translateY = progress * 20;
 
     return {
@@ -35,43 +40,17 @@ export default function Home() {
 
   return (
     <div className="relative">
-      {/* image 배열을 반복해서 각각 렌더링 */}
+      {/* Single images */}
       {image.map((imgSrc, index) => (
         <div key={index} className="relative h-screen w-full sticky top-0 overflow-hidden">
-          <Image
-            src={imgSrc} // 템플릿 리터럴을 사용하여 이미지 경로 설정
-            alt={`${index + 1}`}
-            fill
-            style={{ objectFit: "cover" }}
-          />
-        </div>
-      ))}
-
-      {/* imageSets 배열을 반복해서 각각 렌더링 */}
-      {imageSets.map((set, index) => (
-        <div
-          key={index}
-          className="relative h-screen w-full sticky top-0 overflow-hidden"
-        >
-          <div className="absolute inset-0" style={calculateStyle(index)}>
-            <div className="relative h-full w-full flex">
-              <div className="flex-1 relative">
-                <Image
-                  src={set.left}
-                  alt={`Left ${index + 1}`}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <div className="flex-1 relative">
-                <Image
-                  src={set.right}
-                  alt={`Right ${index + 1}`}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-            </div>
+          <div className="relative h-full w-full flex justify-center items-center">
+            <Image
+              src={imgSrc}
+              alt={`${index + 1}`}
+              layout="fill"
+              objectFit="contain" // 이미지가 잘리지 않고 비율에 맞게 축소
+              style={{ objectPosition: "center" }} // 이미지를 가운데로 맞춤
+            />
           </div>
         </div>
       ))}
