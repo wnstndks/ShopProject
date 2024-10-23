@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Shoes() {
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-semibold mb-8 text-center">슈즈</h1>
+            <h1 className="text-2xl font-semibold mb-8 text-center"></h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Array.from({ length: 9 }).map((_, index) => (
                     <Link key={index} href={`Shoes/${index + 1}`} className="group border border-gray-200 rounded-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
