@@ -15,7 +15,7 @@ export default function Wish() {
                     >
                         <div>
                             <img
-                                src={`/images/shirt${index + 1}.jpg`}
+                                src={`/img/fs${index + 1}.jpg`}
                                 alt={`위시 ${index + 1}`}
                                 className="w-full h-60 object-cover rounded-md mb-4 transition-transform transform hover:scale-105" // 이미지 크기 증가 효과
                             />
